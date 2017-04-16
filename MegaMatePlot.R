@@ -90,7 +90,6 @@ removeNonPolymorphic<-function(myData,dataName,genomeVer) {
 }
 
 
-
 plotFreq <- function (myData, extraData, useLoci=c(2)) {
   CBfreq<-grep("_CBfreq",names(myData))
   plot(myData$Position,myData[,CBfreq[1]], type='p',xlab="Position(bp)",ylab="Hawaii allele frequency",
@@ -99,11 +98,9 @@ plotFreq <- function (myData, extraData, useLoci=c(2)) {
   text(extraData$midpoint,0.98,extraData$chrNum,cex=1, col="black")
   abline(v=extraData$chrEnds,col="dark gray",lty=5)
   abline(v=extraData$locs[useLoci], col="dark red",lwd=0.6)
-  mtext(extraData$locNames[useLoci], at=extraData$locs[useLoci], cex=0.7, col="red",
-        adj=extraData$labelAdj[useLoci],las=2)
+  mtext(extraData$locNames[useLoci], at=extraData$locs[useLoci], cex=0.7, col="red", adj=extraData$labelAdj[useLoci],las=2)
   legend("bottomright",legend=c("1F3","mel-26"),col=c(1,2),pch=16,cex=0.9)
 }
-
 
 
 
@@ -111,14 +108,13 @@ plotSmoothedDiff <- function (myData, extraData, sm=1001, useLoci=c(2)) {
   CBfreq<-grep("_CBfreq",names(myData))
   CBdiff<-myData[,CBfreq[2]]-myData[,CBfreq[1]]
   smdiff<-smootheByChr(CBdiff,myData$Chr,sm)
-  plot(myData$Position,smdiff, type="n",xlab="Position(bp)", ylab="Hawaii allele freq difference", 
-       main=extraData$mainTitle, ylim=c(-1,1), xlim=c(0,max(myData$Position)))
+  plot(myData$Position,smdiff, type="n",xlab="Position(bp)", ylab="Hawaii allele freq difference", main=extraData$mainTitle, 
+ylim=c(-1,1), xlim=c(0,max(myData$Position)))
   plotByChr(myData, smdiff, chrList=extraData$chrs,lwd=4)
   text(extraData$midpoint,0.98,extraData$chrNum,cex=1, col="black")
   abline(v=extraData$chrEnds,col="dark gray",lty=5)
   abline(v=extraData$locs[useLoci], col="red",lwd=0.8)
-  mtext(extraData$locNames[useLoci], at=extraData$locs[useLoci], cex=0.7, col="red",
-        adj=extraData$labelAdj[useLoci],las=2)
+  mtext(extraData$locNames[useLoci], at=extraData$locs[useLoci], cex=0.7, col="red", adj=extraData$labelAdj[useLoci],las=2)
   abline(h=0,lty=5,col="dark gray")
 }
 
@@ -175,7 +171,7 @@ plotPvals<-function(myData, log10pVals, extraData, useLoci=c(2)) {
     abline(h=-log10(0.05),lty=5,col="dark red")
     text(90000000,-log10(0.05),"FDR=0.05", col="dark red",pos=3)
 }
-############### /old functions ###################
+
 
 
 
@@ -254,6 +250,7 @@ findPeaksByChr_slope_plot <- function( data2smoothe, chrName, Position, smWin, s
   return(min(abs(peakVals[2,]-mean(c(4185062,4189761)))))
 }
 
+############### /old functions ###################
 
 plotByChr<-function(myData, yData, chrList, chrColumn="Chr", ...) {
   colours<-brewer.pal(6,"Dark2")
